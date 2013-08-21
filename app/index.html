@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>HTML 5 Web Game</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <!-- build:css(.tmp) styles/main.css -->
+        <link rel="stylesheet" href="styles/main.css">
+        <!-- endbuild -->
+        <!-- build:js scripts/vendor/modernizr.js -->
+        <script src="bower_components/modernizr/modernizr.js"></script>
+        <!-- endbuild -->
+    </head>
+    <body>
+    <div class="container">
+        <div class="game">
+            <div class="player">
+                <div class="android">
+                    <div class="head">
+                        <div class="l_ant"></div>
+                        <div class="r_ant"></div>
+                        <div class="l_eye"></div>
+                        <div class="r_eye"></div>
+                    </div>
+                    <div class="body">
+                        <div class="l_arm"></div>
+                        <div class="r_arm"></div>
+                        <div class="l_leg"></div>
+                        <div class="r_leg"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- build:js scripts/app.js -->
+    <script data-main="scripts/main" src="bower_components/requirejs/require.js"></script>
+    <!-- endbuild -->
+</body>
+</html>
