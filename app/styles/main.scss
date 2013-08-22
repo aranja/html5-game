@@ -12,21 +12,28 @@
 
 .player {
   position: absolute;
-  left: 0;
-  top: 0;
+  left: 100px;
+  top: 100px;
+  width: 68px;
+  height: 81px;
+  margin-left: -34px;
+  margin-top: -81px;
 
   div {margin: 0; padding: 0;}
   div div {background: #A4CA39; position: relative;}
 
   .android {
     height: 402px; width: 278px;
-    margin-left: 58px;
+    margin-left: 12px;
+
+    @include transform-origin(0, 0);
+    @include transform(scale(0.20, 0.20));
   }
 
   .head {
     width: 220px; height: 100px;
     top: 32px;
-    
+
     @include border-radius(110px 110px 0 0);
     
     @include transition(all 0.1s ease-in);
