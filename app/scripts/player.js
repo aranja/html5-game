@@ -2,21 +2,27 @@
 
 define(['controls'], function(controls) {
 
+  var PLAYER_SPEED = 200;
+
   var Player = function(el) {
     this.el = el;
     this.pos = { x: 0, y: 0 };
-    this.speed = 200;
+    this.vel = { x: 0, y: 0 };
   };
 
   Player.prototype.onFrame = function(delta) {
-    if (controls.spacePressed) {
-      this.pos.x += delta * this.speed;
+    // Player input
+    if (controls.keys.right) {
+      this.vel.x = PLAYER_SPEED;
+    } else if (controls.keys.left) {
+      this.vel.x = -PLAYER_SPEED;
+    } else {
+      this.vel.x = 0;
     }
 
-    if (this.pos.x > 200 || this.pos.x < 0) {
-      this.pos.x = Math.min(200, Math.max(0, this.pos.x));
-      this.speed *= -1;
-    }
+    this.pos.x += delta * this.vel.x;
+    this.pos.y += delta * this.vel.y;
+
 
     // Update UI
     this.el.css('transform', 'translate3d(' + this.pos.x + 'px,' + this.pos.y + 'px,0)');
