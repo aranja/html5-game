@@ -11,9 +11,8 @@ require.config({
     }
 });
 
-require(['app', 'jquery', 'bootstrap'], function (app, $) {
+require(['game', 'jquery'], function (Game) {
     'use strict';
-    // use app here
-    console.log(app);
-    console.log('Running jQuery %s', $().jquery);
+    var game = new Game($('.game'));
+    game.start();
 });
