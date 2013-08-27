@@ -1,14 +1,29 @@
 @import "compass/css3";
 @import "_animations";
 
-.container {
-  bottom: 0;
-  left: 10px;
-  min-height: 600px;
+
+.game {
+  left: 50%;
+  top: 50%;
+  width: 480px;
+  height: 320px;
+  margin-left: -200px;
+  margin-top: -150px;
   overflow: hidden;
   position: absolute;
-  right: 0;
-  top: 10px;
+}
+
+.world {
+  position: absolute;
+  width: 5000px;
+  height: 1000px;
+}
+
+.background {
+  background: url('http://assets.sbnation.com/assets/1608607/Screen_Shot_2012-08-06_at_12.23.43_PM.jpeg');
+  position: absolute;
+  height: 479px;
+  width: 3000px;
 }
 
 @import "_player";
