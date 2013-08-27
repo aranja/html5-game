@@ -2,7 +2,7 @@
 
 define(['controls'], function(controls) {
 
-  var PLAYER_SPEED = 200;
+  var PLAYER_SPEED = 400;
   var JUMP_VELOCITY = 1500;
   var GRAVITY = 4000;
 
@@ -44,6 +44,9 @@ define(['controls'], function(controls) {
 
     // Update UI
     this.el.css('transform', 'translate3d(' + this.pos.x + 'px,' + this.pos.y + 'px,0)');
+
+    this.el.toggleClass('jumping', this.vel.y < 0);
+    this.el.toggleClass('walking', this.vel.x !== 0);
   };
 
   return Player;
