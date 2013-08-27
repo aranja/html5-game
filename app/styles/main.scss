@@ -5,10 +5,10 @@
 .game {
   left: 50%;
   top: 50%;
-  width: 480px;
-  height: 320px;
-  margin-left: -200px;
-  margin-top: -150px;
+  width: 800px;
+  height: 600px;
+  margin-left: -400px;
+  margin-top: -300px;
   overflow: hidden;
   position: absolute;
 }
@@ -24,6 +24,15 @@
   position: absolute;
   height: 479px;
   width: 3000px;
+}
+
+.enemy {
+  position: absolute;
+  height: 75px;
+  width: 65px;
+  left: 0;
+  top: 0;
+  background: url('../images/apple.png') 50% 50% / contain no-repeat;
 }
 
 @import "_player";

@@ -1,6 +1,6 @@
 /*global define, $ */
 
-define(['player', 'platform'], function(Player, Platform) {
+define(['player', 'platform', 'enemy'], function(Player, Platform, Enemy) {
 
   var VIEWPORT_PADDING = 100;
 
@@ -13,6 +13,7 @@ define(['player', 'platform'], function(Player, Platform) {
     this.el = el;
     this.player = new Player(this.el.find('.player'), this);
     this.platformsEl = el.find('.platforms');
+    this.entitiesEl = el.find('.entities');
     this.worldEl = el.find('.world');
     this.isPlaying = false;
 
@@ -35,7 +36,7 @@ define(['player', 'platform'], function(Player, Platform) {
   };
 
 
-  Game.prototype.createPlatforms = function() {
+  Game.prototype.createWorld = function() {
     // Ground
     this.addPlatform(new Platform({
       x: 100,
@@ -69,11 +70,24 @@ define(['player', 'platform'], function(Player, Platform) {
       width: 100,
       height: 10
     }));
+
+    var enemy = new Enemy({
+      start: {x: Math.random() * 400 + 100, y: Math.random() * 400 + 100},
+      end: {x: Math.random() * 400 + 100, y: Math.random() * 400 + 100}
+    });
+
+    this.el.find('.entities').append(enemy.el);
+    this.entities.push(enemy);
   };
 
   Game.prototype.addPlatform = function(platform) {
-    this.platforms.push(platform);
+    this.entities.push(platform);
     this.platformsEl.append(platform.el);
+  };
+
+  Game.prototype.addEnemy = function(enemy) {
+    this.entities.push(enemy);
+    this.entitiesEl.append(enemy);
   };
 
   Game.prototype.gameOver = function() {
@@ -99,6 +113,14 @@ define(['player', 'platform'], function(Player, Platform) {
     this.lastFrame = now;
 
     this.player.onFrame(delta);
+
+    for (var i = 0, e; e = this.entities[i]; i++) {
+      e.onFrame(delta);
+
+      if (e.dead) {
+        this.entities.splice(i--, 1);
+      }
+    }
 
     this.updateViewport();
 
@@ -129,16 +151,20 @@ define(['player', 'platform'], function(Player, Platform) {
    * Starts the game.
    */
   Game.prototype.start = function() {
-    this.platforms = [];
-    this.createPlatforms();
+    this.entities = [];
+    this.createWorld();
     this.player.reset();
-    this.viewport = {x: 100, y: 150, width: 480, height: 320};
+    this.viewport = {x: 100, y: 0, width: 800, height: 600};
 
     this.unFreezeGame();
   };
 
   Game.prototype.forEachPlatform = function(handler) {
-    this.platforms.forEach(handler);
+    for (var i = 0, e; e = this.entities[i]; i++) {
+      if (e instanceof Platform) {
+        handler(e);
+      }
+    }
   };
 
   /**
