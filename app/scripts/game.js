@@ -8,7 +8,7 @@ define(['player', 'platform'], function(Player, Platform) {
    */
   var Game = function(el) {
     this.el = el;
-    this.player = new Player(this.el.find('.player'));
+    this.player = new Player(this.el.find('.player'), this);
     this.platformsEl = el.find('.platforms');
 
     // Cache a bound onFrame since we need it each frame.
@@ -80,6 +80,10 @@ define(['player', 'platform'], function(Player, Platform) {
     // Restart the onFrame loop
     this.lastFrame = +new Date() / 1000;
     requestAnimFrame(this.onFrame);
+  };
+
+  Game.prototype.forEachPlatform = function(handler) {
+    this.platforms.forEach(handler);
   };
 
   /**
