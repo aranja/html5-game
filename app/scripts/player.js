@@ -3,13 +3,13 @@
 define(['controls'], function(controls) {
 
   var PLAYER_SPEED = 200;
-  var JUMP_VELOCITY = 800;
+  var JUMP_VELOCITY = 1500;
   var GRAVITY = 4000;
 
   var Player = function(el) {
     this.el = el;
     this.jumping = false;
-    this.pos = { x: 0, y: 0 };
+    this.pos = { x: 200, y: 400 };
     this.vel = { x: 0, y: 0 };
   };
 
@@ -24,7 +24,7 @@ define(['controls'], function(controls) {
     }
 
     // Jumping
-    if (controls.keys.space) {
+    if (controls.keys.space && !this.jumping) {
       this.vel.y = -JUMP_VELOCITY;
       this.jumping = true;
     }
@@ -36,8 +36,8 @@ define(['controls'], function(controls) {
     this.pos.y += delta * this.vel.y;
 
     // Collision with ground
-    if (this.pos.y > 0) {
-      this.pos.y = 0;
+    if (this.pos.y > 400) {
+      this.pos.y = 400;
       this.vel.y = 0;
       this.jumping = false;
     }
