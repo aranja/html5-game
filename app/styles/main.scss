@@ -99,7 +99,7 @@
   }
 
   &.walking .r_leg {
-    @include animation(player-walk-right 0.15s linear infinite alternate);
+    @include animation(player-walk-right 0.15s 0.15s linear infinite alternate);
   }
 }
 
