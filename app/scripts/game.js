@@ -71,13 +71,12 @@ define(['player', 'platform', 'enemy'], function(Player, Platform, Enemy) {
       height: 10
     }));
 
-    var enemy = new Enemy({
-      start: {x: Math.random() * 400 + 100, y: Math.random() * 400 + 100},
-      end: {x: Math.random() * 400 + 100, y: Math.random() * 400 + 100}
-    });
-
-    this.el.find('.entities').append(enemy.el);
-    this.entities.push(enemy);
+    for (var i = 0; i < 20; i++) {
+      this.addEnemy(new Enemy({
+        start: {x: Math.random() * 400 + 100, y: Math.random() * 400 + 100},
+        end: {x: Math.random() * 400 + 100, y: Math.random() * 400 + 100}
+      }));
+    }
   };
 
   Game.prototype.addPlatform = function(platform) {
@@ -87,7 +86,7 @@ define(['player', 'platform', 'enemy'], function(Player, Platform, Enemy) {
 
   Game.prototype.addEnemy = function(enemy) {
     this.entities.push(enemy);
-    this.entitiesEl.append(enemy);
+    this.entitiesEl.append(enemy.el);
   };
 
   Game.prototype.gameOver = function() {

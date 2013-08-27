@@ -21,10 +21,7 @@ define(function() {
     this.pos.y = this.start.y + (this.end.y - this.start.y) * relPosition;
 
     // Update UI
-    this.el.css({
-      left: this.pos.x + 'px',
-      top: this.pos.y + 'px'
-    });
+    this.el.css('transform', 'translate3d(' + this.pos.x + 'px,' + this.pos.y + 'px,0)');
   };
 
   return FloatingEnemy;
