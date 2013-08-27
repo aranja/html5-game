@@ -10,13 +10,26 @@ define(['player', 'platform'], function(Player, Platform) {
     this.el = el;
     this.player = new Player(this.el.find('.player'), this);
     this.platformsEl = el.find('.platforms');
+    this.isPlaying = false;
 
     // Cache a bound onFrame since we need it each frame.
     this.onFrame = this.onFrame.bind(this);
-
-    this.platforms = [];
-    this.createPlatforms();
   };
+
+  Game.prototype.freezeGame = function() {
+    this.isPlaying = false;
+  };
+
+  Game.prototype.unFreezeGame = function() {
+    if (!this.isPlaying) {
+      this.isPlaying = true;
+
+      // Restart the onFrame loop
+      this.lastFrame = +new Date() / 1000;
+      requestAnimFrame(this.onFrame);
+    }
+  };
+
 
   Game.prototype.createPlatforms = function() {
     // Ground
@@ -59,10 +72,24 @@ define(['player', 'platform'], function(Player, Platform) {
     this.platformsEl.append(platform.el);
   };
 
+  Game.prototype.gameOver = function() {
+    this.freezeGame();
+    alert('You are game over! Sorry man...');
+
+    var game = this;
+    setTimeout(function() {
+      game.start();
+    }, 0);
+  };
+
   /**
    * Runs every frame. Calculates a delta and allows each game entity to update itself.
    */
   Game.prototype.onFrame = function() {
+    if (!this.isPlaying) {
+      return;
+    }
+
     var now = +new Date() / 1000,
         delta = now - this.lastFrame;
     this.lastFrame = now;
@@ -77,9 +104,11 @@ define(['player', 'platform'], function(Player, Platform) {
    * Starts the game.
    */
   Game.prototype.start = function() {
-    // Restart the onFrame loop
-    this.lastFrame = +new Date() / 1000;
-    requestAnimFrame(this.onFrame);
+    this.platforms = [];
+    this.createPlatforms();
+    this.player.reset();
+
+    this.unFreezeGame();
   };
 
   Game.prototype.forEachPlatform = function(handler) {

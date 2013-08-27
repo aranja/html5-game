@@ -7,12 +7,17 @@ define(['controls'], function(controls) {
   var GRAVITY = 4000;
   var PLAYER_HALF_WIDTH = 14;
 
+  var HELL_Y = 500;
+
   var Player = function(el, game) {
     this.game = game;
     this.el = el;
+  };
+
+  Player.prototype.reset = function() {
     this.pos = { x: 200, y: 400 };
     this.vel = { x: 0, y: 0 };
-  };
+  }
 
   Player.prototype.onFrame = function(delta) {
     // Player input
@@ -39,11 +44,19 @@ define(['controls'], function(controls) {
     // Collision detection
     this.checkPlatforms(oldY);
 
+    this.checkGameOver();
+
     // Update UI
     this.el.css('transform', 'translate3d(' + this.pos.x + 'px,' + this.pos.y + 'px,0)');
 
     this.el.toggleClass('jumping', this.vel.y < 0);
     this.el.toggleClass('walking', this.vel.x !== 0);
+  };
+
+  Player.prototype.checkGameOver = function() {
+    if (this.pos.y > HELL_Y) {
+      this.game.gameOver();
+    }
   };
 
   Player.prototype.checkPlatforms = function(oldY) {
