@@ -1,0 +1,9 @@
+
+.platform {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 15px;
+  background: #ba4a55;
+  @include border-radius(10px);
+}

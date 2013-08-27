@@ -1,0 +1,110 @@
+
+.player {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 68px;
+  height: 81px;
+  margin-left: -34px;
+  margin-top: -81px;
+
+  div {margin: 0; padding: 0;}
+  div div {background: #A4CA39; position: relative;}
+
+  .android {
+    height: 402px; width: 278px;
+    margin-left: 12px;
+
+    @include transform-origin(0, 0);
+    @include transform(scale(0.20, 0.20));
+  }
+
+  .head {
+    width: 220px; height: 100px;
+    top: 32px;
+
+    @include border-radius(110px 110px 0 0);
+
+    @include transition(all 0.1s ease-in);
+  }
+  .l_eye, .r_eye {
+    background: #fff;
+    width: 20px; height: 20px;
+    position: absolute; top: 42px;
+
+    @include border-radius(10px);
+  }
+  .l_eye {left: 50px;}
+  .r_eye {right: 50px;}
+
+  .l_ant, .r_ant{
+    width: 6px; height: 50px;
+    position: absolute; top: -34px;
+
+    @include border-radius(3px);
+  }
+  .l_ant {
+    left: 50px;
+    @include transform(rotate(-30deg));
+  }
+  .r_ant {
+    right: 50px;
+    @include transform(rotate(30deg));
+  }
+
+  .body{
+    width: 220px; height: 184px;
+    top: 40px;
+
+    @include border-radius(0 0 25px 25px);
+  }
+
+  .l_arm, .r_arm, .l_leg, .r_leg {
+    width: 50px; position: absolute;
+    @include transition(all 0.1s ease);
+  }
+  .l_arm, .r_arm {
+    height: 150px;
+    @include border-radius(25px);
+  }
+  .l_leg, .r_leg {
+    height: 100px; top: 162px;
+    @include border-radius(0 0 25px 25px);
+    @include transform-origin(50%, 0);
+  }
+  .l_arm {left: -58px;}
+  .r_arm {right: -58px;}
+  .l_leg {left: 45px;}
+  .r_leg {right: 45px;}
+
+  &.jumping .r_arm {
+    @include transform-origin(50%, 25px);
+    @include transform(rotate(-180deg));
+  }
+
+  &.walking .l_leg {
+    @include animation(player-walk-left 0.15s linear infinite alternate);
+  }
+
+  &.walking .r_leg {
+    @include animation(player-walk-right 0.15s 0.15s linear infinite alternate);
+  }
+}
+
+@include keyframes(player-walk-left) {
+  from {
+    @include transform(rotate(0));
+  }
+  to {
+    @include transform(rotate(30deg));
+  }
+}
+
+@include keyframes(player-walk-right) {
+  from {
+    @include transform(rotate(0));
+  }
+  to {
+    @include transform(rotate(-30deg));
+  }
+}
