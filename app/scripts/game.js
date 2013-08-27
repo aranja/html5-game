@@ -12,6 +12,7 @@ define(['player', 'platform', 'enemy'], function(Player, Platform, Enemy) {
   var Game = function(el) {
     this.el = el;
     this.player = new Player(this.el.find('.player'), this);
+    this.entities = [];
     this.platformsEl = el.find('.platforms');
     this.entitiesEl = el.find('.entities');
     this.worldEl = el.find('.world');
@@ -71,12 +72,10 @@ define(['player', 'platform', 'enemy'], function(Player, Platform, Enemy) {
       height: 10
     }));
 
-    for (var i = 0; i < 20; i++) {
-      this.addEnemy(new Enemy({
-        start: {x: Math.random() * 400 + 100, y: Math.random() * 400 + 100},
-        end: {x: Math.random() * 400 + 100, y: Math.random() * 400 + 100}
-      }));
-    }
+    this.addEnemy(new Enemy({
+      start: {x: 400, y: 350},
+      end: {x: 400, y: 200}
+    }));
   };
 
   Game.prototype.addPlatform = function(platform) {
@@ -150,17 +149,30 @@ define(['player', 'platform', 'enemy'], function(Player, Platform, Enemy) {
    * Starts the game.
    */
   Game.prototype.start = function() {
+    // Cleanup last game.
+    this.entities.forEach(function(e) { e.el.remove(); });
     this.entities = [];
+
+    // Set the stage.
     this.createWorld();
     this.player.reset();
     this.viewport = {x: 100, y: 0, width: 800, height: 600};
 
+    // Then start.
     this.unFreezeGame();
   };
 
   Game.prototype.forEachPlatform = function(handler) {
     for (var i = 0, e; e = this.entities[i]; i++) {
       if (e instanceof Platform) {
+        handler(e);
+      }
+    }
+  };
+
+  Game.prototype.forEachEnemy = function(handler) {
+    for (var i = 0, e; e = this.entities[i]; i++) {
+      if (e instanceof Enemy) {
         handler(e);
       }
     }

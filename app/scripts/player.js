@@ -6,6 +6,7 @@ define(['controls'], function(controls) {
   var JUMP_VELOCITY = 1500;
   var GRAVITY = 4000;
   var PLAYER_HALF_WIDTH = 14;
+  var PLAYER_RADIUS = 30;
 
   var HELL_Y = 500;
 
@@ -43,7 +44,7 @@ define(['controls'], function(controls) {
 
     // Collision detection
     this.checkPlatforms(oldY);
-
+    this.checkEnemies();
     this.checkGameOver();
 
     // Update UI
@@ -72,6 +73,26 @@ define(['controls'], function(controls) {
           that.pos.y = p.rect.y;
           that.vel.y = 0;
         }
+      }
+    });
+  };
+
+  Player.prototype.checkEnemies = function() {
+    var centerX = this.pos.x;
+    var centerY = this.pos.y - 40;
+    var that = this;
+    this.game.forEachEnemy(function(enemy) {
+      // Distance squared
+      var distanceX = enemy.pos.x - centerX;
+      var distanceY = enemy.pos.y - centerY;
+
+      // Minimum distance squared
+      var distanceSq = distanceX * distanceX + distanceY * distanceY;
+      var minDistanceSq = (enemy.radius + PLAYER_RADIUS) * (enemy.radius + PLAYER_RADIUS);
+
+      // What up?
+      if (distanceSq < minDistanceSq) {
+        that.game.gameOver();
       }
     });
   };
