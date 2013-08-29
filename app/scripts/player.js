@@ -49,6 +49,8 @@ define(['controls'], function(controls) {
     // Jumping
     if (this.vel.y === 0) {
       this.vel.y = -JUMP_VELOCITY;
+
+      this.game.sound.play('laser');
     }
   };
 

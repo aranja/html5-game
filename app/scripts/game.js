@@ -18,6 +18,15 @@ define(['player', 'platform', 'enemy', 'controls'], function(Player, Platform, E
     this.worldEl = el.find('.world');
     this.isPlaying = false;
 
+    this.sound = new Howl({
+      urls: ['/sounds/main.mp3', '/sounds/main.ogg'],
+      sprite: {
+        blast: [0, 2000],
+        laser: [3000, 700],
+        winner: [5000, 9000]
+      }
+    });
+
     // Cache a bound onFrame since we need it each frame.
     this.onFrame = this.onFrame.bind(this);
   };
