@@ -1,6 +1,6 @@
 /*global define, $ */
 
-define(['player', 'platform', 'enemy'], function(Player, Platform, Enemy) {
+define(['player', 'platform', 'enemy', 'controls'], function(Player, Platform, Enemy, controls) {
 
   var VIEWPORT_PADDING = 100;
 
@@ -110,6 +110,7 @@ define(['player', 'platform', 'enemy'], function(Player, Platform, Enemy) {
         delta = now - this.lastFrame;
     this.lastFrame = now;
 
+    controls.onFrame(delta);
     this.player.onFrame(delta);
 
     for (var i = 0, e; e = this.entities[i]; i++) {

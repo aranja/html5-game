@@ -1,7 +1,6 @@
 @import "compass/css3";
 @import "_animations";
 
-
 .game {
   left: 50%;
   top: 50%;
@@ -32,6 +31,8 @@
   width: 65px;
   left: 0;
   top: 0;
+  margin-left: -32px;
+  margin-top: -37px;
   background: url('../images/apple.png') 50% 50% / contain no-repeat;
 }
 
