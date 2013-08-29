@@ -1,6 +1,11 @@
 @import "compass/css3";
 @import "_animations";
 
+body {
+  background: black;
+  font-size: 10px;
+}
+
 .game {
   left: 50%;
   top: 50%;
