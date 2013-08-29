@@ -13,6 +13,8 @@ define(['controls'], function(controls) {
   var Player = function(el, game) {
     this.game = game;
     this.el = el;
+
+    controls.on('jump', this.onJump.bind(this));
   };
 
   Player.prototype.reset = function() {
@@ -23,11 +25,6 @@ define(['controls'], function(controls) {
   Player.prototype.onFrame = function(delta) {
     // Player input
     this.vel.x = controls.inputVec.x * PLAYER_SPEED;
-
-    // Jumping
-    if (controls.keys.space && this.vel.y === 0) {
-      this.vel.y = -JUMP_VELOCITY;
-    }
 
     // Gravity
     this.vel.y += GRAVITY * delta;
@@ -46,6 +43,13 @@ define(['controls'], function(controls) {
 
     this.el.toggleClass('jumping', this.vel.y < 0);
     this.el.toggleClass('walking', this.vel.x !== 0);
+  };
+
+  Player.prototype.onJump = function() {
+    // Jumping
+    if (this.vel.y === 0) {
+      this.vel.y = -JUMP_VELOCITY;
+    }
   };
 
   Player.prototype.checkGameOver = function() {

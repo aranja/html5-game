@@ -1,0 +1,13 @@
+{
+  "name": "asEvented",
+  "_cacheHeaders": {
+    "ETag": "\"76a37bfee76944d7af23f3ba1139297d\"",
+    "Content-Length": "43385",
+    "Content-Type": "text/html; charset=utf-8"
+  },
+  "_release": "e-tag:76a37bfee",
+  "main": "index",
+  "_source": "https://github.com/mkuklis/asEvented",
+  "_target": "*",
+  "_originalSource": "https://github.com/mkuklis/asEvented"
+}

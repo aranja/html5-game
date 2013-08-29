@@ -24,8 +24,11 @@ define([], function() {
     $(window)
       .on('keydown', this.onKeyDown.bind(this))
       .on('keyup', this.onKeyUp.bind(this))
-      .on('deviceorientation', this.onOrientation.bind(this));
+      .on('deviceorientation', this.onOrientation.bind(this))
+      .on('touchstart', this.onTouch.bind(this));
   };
+
+  Controls.prototype = new EventEmitter2();
 
   Controls.prototype.onOrientation = function(e) {
     e = e.originalEvent;
@@ -44,11 +47,18 @@ define([], function() {
     this.tilt = Math.max(Math.min(speed, 1), -1);
   };
 
+  Controls.prototype.onTouch = function(e) {
+    this.emit('jump');
+  };
 
   Controls.prototype.onKeyDown = function(e) {
-    if (e.keyCode in KEYS) {
+    if (e.keyCode in KEYS && !this.keys[KEYS[e.keyCode]]) {
       var keyName = KEYS[e.keyCode];
       this.keys[keyName] = true;
+
+      if (keyName === 'space') {
+        this.emit('jump');
+      }
       return false;
     }
   };
