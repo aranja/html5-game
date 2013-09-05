@@ -1,6 +1,6 @@
 /*global define, $ */
 
-define(['player', 'platform', 'enemy', 'controls'], function(Player, Platform, Enemy, controls) {
+define(['player', 'platform', 'enemy', 'controls', 'Howler'], function(Player, Platform, Enemy, controls, howler) {
 
   var VIEWPORT_PADDING = 100;
 
@@ -18,7 +18,7 @@ define(['player', 'platform', 'enemy', 'controls'], function(Player, Platform, E
     this.worldEl = el.find('.world');
     this.isPlaying = false;
 
-    this.sound = new Howl({
+    this.sound = new howler.Howl({
       urls: ['/sounds/main.mp3', '/sounds/main.ogg'],
       sprite: {
         blast: [0, 2000],

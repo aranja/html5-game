@@ -300,7 +300,7 @@ module.exports = function (grunt) {
                     cwd: '<%= yeoman.app %>',
                     dest: '.tmp',
                     src: [
-                        'bower_components/{,*/}*.js',
+                        'bower_components/{,*/,*/*/}*.js',
                         'scripts/{,*/}*.js'
                     ]
                 }]
@@ -315,7 +315,8 @@ module.exports = function (grunt) {
                         '*.{ico,png,txt}',
                         '.htaccess',
                         'images/{,*/}*.{webp,gif}',
-                        'styles/fonts/*'
+                        'styles/fonts/*',
+                        'sounds/*'
                     ]
                 }]
             },

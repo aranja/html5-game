@@ -1,6 +1,6 @@
 /*global define, $ */
 
-define([], function() {
+define(['eventemitter2'], function(EventEmitter2) {
 
   var KEYS = {
     32: 'space',
