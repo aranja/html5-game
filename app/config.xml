@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <widget xmlns = "http://www.w3.org/ns/widgets"
+        xmlns:gap = "http://phonegap.com/ns/1.0"
+        id        = "is.aranja.droidinator"
+        versionCode="1" 
+        version   = "1.0.0">
+
+    <!-- versionCode is optional and Android only -->
+
+    <name>Droidinator</name>
+
+    <description>
+        A superfun 2d platformer. 
+    </description>
+
+    <author href="http://nilsson.is" email="eirikur@nilsson.is">
+        Eirikur Nilsson 
+    </author>
+
+    <preference name="orientation" value="landscape" />
+
+    <preference name="webviewbounce" value="false" />
+
+    <icon src="icon.png" />
+    <gap:splash src="splash.png" />
+</widget>
